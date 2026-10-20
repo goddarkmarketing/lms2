@@ -61,10 +61,8 @@ function getHomepageExtraFaqItems(): array
 
 function getHomepageFaqItems(): array
 {
-    return array_merge(
-        array_slice(getFaqPageItems(), 0, 6),
-        getHomepageExtraFaqItems()
-    );
+    $all = array_merge(getFaqPageItems(), getHomepageExtraFaqItems());
+    return array_slice($all, 0, 10);
 }
 
 function getLearningPathItems(): array
@@ -108,33 +106,13 @@ function getFooterCourseLinks(int $limit = 8): array
 
 function getFooterHskCourseLinks(): array
 {
-    $labels = [
-        'hsk1-pinyin' => 'HSK 1',
-        'hsk2' => 'HSK 2',
-        'hsk3' => 'HSK 3',
-        'hsk4' => 'HSK 4',
-        'hsk5' => 'HSK 5',
-    ];
-    try {
-        $courses = getCourses();
-        $bySlug = [];
-        foreach ($courses as $course) {
-            $bySlug[(string) ($course['slug'] ?? '')] = $course;
-        }
-        $links = [];
-        foreach ($labels as $slug => $label) {
-            if (!isset($bySlug[$slug])) {
-                continue;
-            }
-            $links[] = [
-                'title' => $label,
-                'url' => APP_URL . '/public/course.php?slug=' . urlencode($slug),
-            ];
-        }
-        return $links;
-    } catch (Throwable $e) {
-        return [];
+    $coursesUrl = APP_URL . '/public/courses.php';
+    $links = [];
+    foreach (['LEVEL 1', 'LEVEL 2', 'LEVEL 3', 'LEVEL 4', 'LEVEL 5', 'SCI-MAP'] as $label) {
+        $links[] = ['title' => $label, 'url' => $coursesUrl . '?q=' . urlencode($label)];
     }
+    $links[] = ['title' => 'คอร์สออนไลน์', 'url' => $coursesUrl . '?type=recorded'];
+    return $links;
 }
 
 function subscribeNewsletter(string $email): array
@@ -174,6 +152,8 @@ function lineContactUrl(): string
     if (str_starts_with($lineId, 'http')) {
         return $lineId;
     }
-    $id = ltrim($lineId, '@');
-    return 'https://line.me/ti/p/~' . rawurlencode($id);
+    if (str_starts_with($lineId, '@')) {
+        return 'https://line.me/R/ti/p/%40' . rawurlencode(substr($lineId, 1));
+    }
+    return 'https://line.me/ti/p/~' . rawurlencode($lineId);
 }

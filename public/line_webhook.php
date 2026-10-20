@@ -41,10 +41,10 @@ foreach ($payload['events'] ?? [] as $event) {
     if ($type === 'follow' && $lineUserId !== '') {
         lineReplyMessage(
             $replyToken,
-            "สวัสดีค่ะ ยินดีต้อนรับสู่ Wenxin Chinese\n\n"
+            "สวัสดีค่ะ ยินดีต้อนรับสู่กวดวิชา Learning Studios\n\n"
             . "เชื่อมบัญชีนักเรียน: ส่งเบอร์โทรที่ใช้สมัครเรียนในแชทนี้\n"
             . "(เช่น 0812345678)\n\n"
-            . "เมื่อเชื่อมสำเร็จ ระบบจะแจ้งการจองคลาสและลิงก์ Zoom ให้ทาง LINE นี้ค่ะ"
+            . "เมื่อเชื่อมสำเร็จ ระบบจะแจ้งการจองคลาสและลิงก์ Google Meet ให้ทาง LINE นี้ค่ะ"
         );
         continue;
     }
@@ -63,7 +63,7 @@ foreach ($payload['events'] ?? [] as $event) {
                 lineReplyMessage(
                     $replyToken,
                     "เชื่อมบัญชีเรียบร้อยแล้วค่ะ\n\n"
-                    . "ระบบจะแจ้งการจองคลาสและลิงก์ Zoom ทาง LINE นี้\n"
+                    . "ระบบจะแจ้งการจองคลาสและลิงก์ Google Meet ทาง LINE นี้\n"
                     . "ดูรายละเอียด: " . lineOaStudentAccountUrl()
                 );
             } else {
@@ -80,7 +80,7 @@ foreach ($payload['events'] ?? [] as $event) {
         if (in_array(mb_strtolower($text), ['help', 'ช่วย', 'วิธี', 'help me'], true)) {
             lineReplyMessage(
                 $replyToken,
-                "วิธีเชื่อมบัญชี Wenxin Chinese\n"
+                "วิธีเชื่อมบัญชีกวดวิชา Learning Studios\n"
                 . "1. สมัครหรือเข้าสู่ระบบที่เว็บ\n"
                 . "2. เพิ่มเพื่อน Official Account นี้\n"
                 . "3. ส่งเบอร์โทรที่ใช้สมัครในแชท\n"

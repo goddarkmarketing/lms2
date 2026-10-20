@@ -3,14 +3,17 @@ declare(strict_types=1);
 require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/cart.php';
 require_once __DIR__ . '/student_auth.php';
+require_once __DIR__ . '/site_content.php';
+ensureLeonaClientUpdates();
 $settings = getSettings();
-$pageTitle = $pageTitle ?? getSetting('site_title', 'Wenxin Chinese');
+$pageTitle = $pageTitle ?? getSetting('site_title', 'กวดวิชา Learning Studios');
 $cartCount = cartCount();
 $cartItems = cartItems();
 $currentStudent = currentStudent();
 $checkoutNavUrl = $cartCount > 0
     ? APP_URL . '/public/checkout.php'
     : APP_URL . '/public/cart.php';
+$isHome = str_ends_with(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? ''), '/index.php');
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -18,20 +21,23 @@ $checkoutNavUrl = $cartCount > 0
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($pageTitle) ?> | <?= e(getSetting('site_title')) ?></title>
-    <meta name="description" content="<?= e(getSetting('site_tagline')) ?>">
+  <meta name="description" content="<?= e(getSetting('site_tagline')) ?>">
+    <link rel="icon" href="<?= asset('images/learning-studios/favicon-32.png') ?>" type="image/png" sizes="32x32">
+    <link rel="icon" href="<?= asset('images/learning-studios/icon-192.png') ?>" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="<?= asset('images/learning-studios/icon-192.png') ?>">
     <?php require __DIR__ . '/views/fonts_head.php'; ?>
-    <link rel="stylesheet" href="<?= asset('css/style.css') ?>?v=127">
-    <link rel="icon" href="<?= e(brandLogoAsset()) ?>" type="image/svg+xml">
+    <link rel="stylesheet" href="<?= asset('css/style.css') ?>?v=165">
+    <?php if (!empty($pageStylesheets) && is_array($pageStylesheets)): ?>
+        <?php foreach ($pageStylesheets as $sheet): ?>
+        <link rel="stylesheet" href="<?= asset($sheet) ?>?v=4">
+        <?php endforeach; ?>
+    <?php endif; ?>
 </head>
-<body>
-<header class="site-header" id="top">
+<body class="<?= $isHome ? 'page-home' : '' ?>">
+<header class="site-header ls-header" id="top">
     <div class="container header-inner">
-        <a href="<?= APP_URL ?>/public/index.php" class="brand">
-            <img src="<?= e(brandLogoAsset()) ?>" alt="Wenxin Chinese" class="brand-logo">
-            <span class="brand-text">
-                <strong>WENXIN</strong>
-                <small>CHINESE</small>
-            </span>
+        <a href="<?= APP_URL ?>/public/index.php" class="brand ls-brand" aria-label="กวดวิชา Learning Studios">
+            <img class="ls-brand-logo" src="<?= e(brandLogoAsset()) ?>" alt="Learning Studios" width="360" height="139" decoding="async">
         </a>
         <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู">
             <span></span><span></span><span></span>
@@ -67,8 +73,8 @@ $checkoutNavUrl = $cartCount > 0
                     <span class="cart-count" id="cartCount"><?= (int) $cartCount ?></span>
                 </button>
                 <?php if ($currentStudent): ?>
-                <a href="<?= APP_URL ?>/public/profile.php" class="btn btn-primary btn-sm header-action-btn">โปรไฟล์</a>
-                <a href="<?= APP_URL ?>/public/student-logout.php" class="btn btn-outline btn-sm header-action-btn">ออกจากระบบ</a>
+                <a href="<?= APP_URL ?>/public/my-courses.php" class="btn btn-sm header-action-btn header-btn-register">เริ่มเรียน</a>
+                <a href="<?= APP_URL ?>/public/profile.php" class="btn btn-primary btn-sm header-action-btn header-btn-login">โปรไฟล์</a>
                 <?php else: ?>
                 <a href="<?= APP_URL ?>/public/register.php" class="btn btn-sm header-action-btn header-btn-register">สมัครสมาชิก</a>
                 <a href="<?= APP_URL ?>/public/login.php" class="btn btn-primary btn-sm header-action-btn header-btn-login">เข้าสู่ระบบ</a>
@@ -81,20 +87,20 @@ $checkoutNavUrl = $cartCount > 0
 <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="ตะกร้าสินค้า">
     <div class="cart-drawer-header">
         <h3>ตะกร้าของคุณ</h3>
-        <button type="button" class="cart-close" id="cartCloseBtn" aria-label="ปิดตะกร้า">✕</button>
+        <button type="button" class="cart-close" id="cartCloseBtn" aria-label="ปิดตะกร้า"><?= lucide_icon('x', ['size' => 18]) ?></button>
     </div>
     <div class="cart-drawer-body">
         <?php if (!$cartItems): ?>
-            <p class="cart-empty">ยังไม่มีคอร์สในตะกร้า</p>
+            <p class="cart-empty">ยังไม่มีรายการในตะกร้า</p>
         <?php else: ?>
             <ul class="cart-list">
                 <?php foreach ($cartItems as $item): ?>
                     <li class="cart-item">
                         <div class="cart-item-main">
                             <div class="cart-item-title"><?= e($item['title'] ?? '') ?></div>
-                            <div class="cart-item-price"><?= e(formatPrice((float) ($item['price'] ?? 0))) ?></div>
+                            <div class="cart-item-price"><?= e(cartItemTypeLabel($item)) ?> · <?= e(formatPrice((float) ($item['price'] ?? 0))) ?></div>
                         </div>
-                        <a class="cart-remove" href="<?= APP_URL ?>/public/cart_remove.php?course_id=<?= (int) ($item['id'] ?? 0) ?>&return=<?= urlencode(currentReturnPath()) ?>" title="นำออกจากตะกร้า">ลบ</a>
+                        <a class="cart-remove" href="<?= e(cartItemRemoveUrl($item, currentReturnPath())) ?>" title="นำออกจากตะกร้า">ลบ</a>
                     </li>
                 <?php endforeach; ?>
             </ul>

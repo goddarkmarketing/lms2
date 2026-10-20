@@ -243,7 +243,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
         <aside class="course-sidebar">
             <a href="<?= e($startUrl) ?>" class="course-sidebar-cover-link">
-                <img src="<?= e(courseCoverUrl($course)) ?>" alt="<?= e($course['title']) ?>" class="course-sidebar-cover">
+                <img src="<?= e(courseCoverUrl($course)) ?>" alt="<?= e($course['title']) ?>" class="course-sidebar-cover<?= courseHasBookCover($course) ? ' course-sidebar-cover--book' : '' ?>">
             </a>
 
             <ul class="course-sidebar-stats" aria-label="ข้อมูลคอร์ส">

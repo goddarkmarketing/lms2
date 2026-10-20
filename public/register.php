@@ -58,17 +58,14 @@ require_once dirname(__DIR__) . '/includes/header.php';
         <div class="auth-register-shell">
             <aside class="auth-register-side" aria-label="สิทธิประโยชน์สมาชิก">
                 <div class="auth-register-side-inner">
-                    <div class="auth-register-logo-wrap">
-                        <img src="<?= e(brandLogoAsset()) ?>" alt="Wenxin Chinese" class="auth-register-logo">
-                    </div>
-                    <p class="auth-register-eyebrow">WENXIN CHINESE</p>
-                    <h2 class="auth-register-side-title">เริ่มเรียนภาษาจีน<br>กับเราวันนี้</h2>
+                    <p class="auth-register-eyebrow">Learning Studios</p>
+                    <h2 class="auth-register-side-title">เริ่มติวกับเรา<br>ได้วันนี้</h2>
                     <ul class="auth-register-perks">
                         <li>
                             <span class="auth-register-perk-icon" aria-hidden="true">
                                 <?= lucide_icon('circle-check', ['size' => 16, 'stroke' => '2.5']) ?>
                             </span>
-                            <span>เข้าเรียนคอร์ส HSK ได้ทันทีหลังเปิดสิทธิ์</span>
+                            <span>เข้าเรียนคอร์สได้ทันทีหลังเปิดสิทธิ์</span>
                         </li>
                         <li>
                             <span class="auth-register-perk-icon" aria-hidden="true">

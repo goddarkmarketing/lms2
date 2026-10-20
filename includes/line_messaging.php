@@ -371,11 +371,11 @@ function linePushBookingConfirmed(int $studentId, array $booking): void
     $zoom = $session ? getSessionZoomUrl($session) : null;
     $when = $session ? formatSessionRange($session) : '';
 
-    $msg = "[Wenxin Chinese]\nยืนยันการจองคลาสแล้ว\n"
+    $msg = "[Learning Studios]\nยืนยันการจองคลาสแล้ว\n"
         . 'คอร์ส: ' . ($booking['course_title'] ?? '') . "\n"
         . 'วันเวลา: ' . $when;
     if ($zoom) {
-        $msg .= "\nลิงก์ Zoom: " . $zoom;
+        $msg .= "\n" . liveMeetingLinkLabel($zoom) . ': ' . $zoom;
     }
     $msg .= "\n\nดูรายละเอียด: " . lineOaStudentAccountUrl();
 
@@ -395,7 +395,7 @@ function linePushClassReminder(int $studentId, array $booking): void
     $zoom = $session ? getSessionZoomUrl($session) : null;
     $when = $session ? formatSessionRange($session) : '';
 
-    $msg = "[Wenxin Chinese]\nแจ้งเตือนก่อนเริ่มคลาส\n"
+    $msg = "[Learning Studios]\nแจ้งเตือนก่อนเริ่มคลาส\n"
         . ($booking['course_title'] ?? '') . "\n"
         . 'เวลา: ' . $when;
     if ($zoom) {

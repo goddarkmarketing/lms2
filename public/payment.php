@@ -28,13 +28,16 @@ requireCartForCheckout();
 
 $items = cartItems();
 $amount = cartTotal();
-if (!$courseId && count($items) === 1) {
-    $courseId = (int) ($items[0]['id'] ?? 0);
+if (!$courseId) {
+    $courseOnly = array_values(array_filter($items, static fn($i) => ($i['item_type'] ?? 'course') === 'course'));
+    if (count($courseOnly) === 1) {
+        $courseId = (int) ($courseOnly[0]['id'] ?? 0);
+    }
 }
 
 $summary = cartTitlesSummary();
 if ($summary !== '' && !str_contains($note, $summary)) {
-    $note = ($note !== '' ? $note . "\n" : '') . 'คอร์สในตะกร้า: ' . $summary;
+    $note = ($note !== '' ? $note . "\n" : '') . 'รายการในตะกร้า: ' . $summary;
 }
 $note = appendCartIdsToNote($note);
 $note = appendSessionMapToNote($note, getCartSessionMap());
@@ -42,6 +45,11 @@ $note = appendSessionMapToNote($note, getCartSessionMap());
 $appliedCoupon = getAppliedCoupon();
 $couponCode = $appliedCoupon['code'] ?? null;
 if ($couponCode) {
+    $blocked = couponRestrictionMessage((string) $couponCode, $email, $phone);
+    if ($blocked) {
+        flash('payment_error', $blocked);
+        redirect('/public/checkout.php');
+    }
     $note = ($note !== '' ? $note . "\n" : '') . 'coupon:' . $couponCode;
 }
 
@@ -107,12 +115,19 @@ try {
     }
 
     $courseIds = getCourseIdsFromCartItems($items);
-    if ($courseIds) {
+    $examPackIds = getExamPackIdsFromCartItems($items);
+    if ($courseIds || $examPackIds) {
         $studentId = resolveCheckoutStudentId($name, $email ?: null, $phone);
-        enrollStudentInCourses($studentId, $courseIds, 'pending');
-        $sessionMap = getCartSessionMap();
-        if ($sessionMap) {
-            createBookingsForPayment($paymentId, $studentId, $sessionMap, 'pending');
+        if ($courseIds) {
+            enrollStudentInCourses($studentId, $courseIds, 'pending');
+            $sessionMap = getCartSessionMap();
+            if ($sessionMap) {
+                createBookingsForPayment($paymentId, $studentId, $sessionMap, 'pending');
+            }
+        }
+        if ($examPackIds) {
+            require_once dirname(__DIR__) . '/includes/exam.php';
+            grantExamPurchases($studentId, $examPackIds, 'pending', $paymentId);
         }
     }
 

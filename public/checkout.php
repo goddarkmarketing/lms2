@@ -361,7 +361,7 @@ $omiseReady = isOmiseEnabled();
                 </div>
 
                 <div class="checkout-trust-card">
-                    <h3>ทำไมต้องชำระกับ Wenxin</h3>
+                    <h3>ทำไมต้องชำระกับ Learning Studios</h3>
                     <ul>
                         <li>
                             <span class="checkout-mini-icon" aria-hidden="true">
@@ -424,7 +424,7 @@ $omiseReady = isOmiseEnabled();
                         </span>
                         <div class="checkout-mini-text">
                             <strong>Facebook</strong>
-                            <span>ติดต่อทีมงาน Wenxin</span>
+                            <span>ติดต่อทีมงาน Learning Studios</span>
                         </div>
                     </a>
                     <?php endif; ?>

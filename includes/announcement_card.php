@@ -40,7 +40,7 @@ if ($excerpt === '') {
         <a href="<?= e($detailUrl) ?>" class="announcement-card-content-link">
             <h3 class="announcement-card-title"><?= e($announcement['title']) ?></h3>
             <p class="announcement-card-excerpt"><?= e($excerpt) ?></p>
-            <span class="announcement-card-more">อ่านต่อ →</span>
+            <span class="announcement-card-more">อ่านต่อ<?= lucide_text_link_suffix(14) ?></span>
         </a>
     </div>
 </article>

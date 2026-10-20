@@ -26,7 +26,6 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
 <section class="auth-page">
     <div class="auth-card">
-        <img src="<?= e(brandLogoAsset()) ?>" alt="Logo" class="auth-logo">
         <h1>ลืมรหัสผ่าน</h1>
         <p style="text-align:center;color:var(--gray-600);margin-bottom:1.5rem;font-size:.9rem">กรอกเบอร์โทรหรืออีเมลที่ลงทะเบียนไว้</p>
         <?php if ($message): ?>

@@ -34,7 +34,6 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
 <section class="auth-page">
     <div class="auth-card">
-        <img src="<?= e(brandLogoAsset()) ?>" alt="Logo" class="auth-logo">
         <h1>ตั้งรหัสผ่านใหม่</h1>
         <?php if (!$record): ?>
             <div class="alert alert-error">ลิงก์หมดอายุหรือไม่ถูกต้อง กรุณาขอรีเซ็ตใหม่</div>

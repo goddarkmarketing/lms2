@@ -103,8 +103,8 @@ require_once dirname(__DIR__) . '/includes/header.php';
 <section class="section section-alt instructor-page-courses">
     <div class="container">
         <div class="section-header">
-            <h2>คอร์สจากอาจารย์เหวินซิน</h2>
-            <p>เริ่มเรียนภาษาจีนกับคอร์สที่ออกแบบโดยอาจารย์โดยตรง</p>
+            <h2>คอร์สจาก <?= e($instructor['name']) ?></h2>
+            <p>เริ่มเรียนกับคอร์สที่ออกแบบโดยคุณครูโดยตรง</p>
         </div>
         <div class="course-grid">
             <?php foreach ($featuredCourses as $course): ?>

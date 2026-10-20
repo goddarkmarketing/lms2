@@ -69,7 +69,7 @@ $isActive = parseCheckboxFlag('1');
 db()->prepare('UPDATE courses SET is_active = ? WHERE id = ?')->execute([$isActive, $courseId]);
 test_check('บันทึกแบบติ๊กเปิดใช้งาน → is_active=1', (int) (getCourseById($courseId)['is_active'] ?? 0) === 1);
 
-test_check('categoryLabel', categoryLabel('hsk') === 'HSK');
+test_check('categoryLabel', categoryLabel('hsk') === 'สรุปเนื้อหา');
 test_check('levelBadge', levelBadge('beginner') === 'เริ่มต้น');
 test_check('formatPrice', str_contains(formatPrice(990), '990'));
 

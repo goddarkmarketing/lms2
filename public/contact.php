@@ -15,7 +15,7 @@ $email = publicContactEmail();
 $facebook = trim(getSetting('facebook_url', ''));
 $youtube = trim(getSetting('youtube_url', ''));
 $tiktok = trim(getSetting('tiktok_url', ''));
-$tagline = getSetting('site_tagline', 'สถาบันสอนภาษาจีนออนไลน์ คุณภาพ เรียนง่าย ได้ผลจริง');
+$tagline = getSetting('site_tagline', 'ติวสังคมศึกษาเข้าใจง่าย เห็นผลจริง');
 $checkoutUrl = $checkoutNavUrl ?? APP_URL . '/public/cart.php';
 
 $contactChannels = [];
@@ -65,7 +65,7 @@ if ($facebook !== '') {
         'tone' => 'facebook',
         'label' => 'Facebook',
         'title' => 'ติดตามข่าวสาร',
-        'value' => $contactContent['facebook_label'] ?? 'Wenxin Chinese',
+        'value' => $contactContent['facebook_label'] ?? 'กวดวิชา Learning Studios',
         'hint' => 'อัปเดตคอร์ส กิจกรรม และเทคนิคการเรียน',
         'href' => $facebook,
         'external' => true,
@@ -79,7 +79,7 @@ if ($youtube !== '') {
         'label' => 'YouTube',
         'title' => 'ชมคลิปสอน',
         'value' => 'YouTube Channel',
-        'hint' => 'ตัวอย่างบทเรียนและเทคนิคภาษาจีน',
+        'hint' => 'ตัวอย่างบทเรียนและเทคนิคทำข้อสอบ',
         'href' => $youtube,
         'external' => true,
         'cta' => 'ดูช่อง YouTube',
@@ -92,7 +92,7 @@ if ($tiktok !== '') {
         'label' => 'TikTok',
         'title' => 'คลิปสั้นน่ารู้',
         'value' => 'TikTok',
-        'hint' => 'เรียนรู้ภาษาจีนแบบสนุกในคลิปสั้น',
+        'hint' => 'คลิปสั้นทบทวนบทเรียน',
         'href' => $tiktok,
         'external' => true,
         'cta' => 'ดู TikTok',
@@ -145,6 +145,19 @@ if ($tiktok !== '') {
 
         <?php if ($contactChannels): ?>
         <div class="contact-page-channels-panel">
+            <?php if (is_file(BASE_PATH . '/assets/images/learning-studios/line-qr.png')): ?>
+            <div class="contact-line-qr">
+                <img src="<?= e(asset('images/learning-studios/line-qr.png')) ?>" alt="คิวอาร์โค้ด LINE กวดวิชา Learning Studios" width="220" height="220">
+                <div>
+                    <p class="contact-line-qr-label">LINE</p>
+                    <h3>เพิ่มเพื่อนผ่านคิวอาร์โค้ด</h3>
+                    <p>สแกนด้วยแอป LINE เพื่อสอบถามคอร์ส การสมัครเรียน และการชำระเงิน</p>
+                    <?php if ($lineId !== '' && $lineUrl !== ''): ?>
+                    <a class="btn btn-primary btn-sm" href="<?= e($lineUrl) ?>" target="_blank" rel="noopener">เปิด LINE</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
             <?php foreach ($contactChannels as $channel): ?>
             <?php include dirname(__DIR__) . '/includes/views/contact_channel_card.php'; ?>
             <?php endforeach; ?>

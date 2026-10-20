@@ -80,12 +80,6 @@ if (!$contactFabItems) {
     return;
 }
 
-$contactFabMascotPath = dirname(__DIR__, 2) . '/assets/images/contact/contact-fab-mascot.png';
-$contactFabMascotUrl = asset('images/contact/contact-fab-mascot.png');
-if (is_file($contactFabMascotPath)) {
-    $contactFabMascotUrl .= '?v=' . (string) filemtime($contactFabMascotPath);
-}
-
 ?>
 <div class="contact-fab" id="contactFab">
     <div class="contact-fab-panel" id="contactFabPanel" role="dialog" aria-label="ช่องทางติดต่อ" aria-hidden="true">
@@ -111,30 +105,16 @@ if (is_file($contactFabMascotPath)) {
             <?php endforeach; ?>
         </ul>
     </div>
-    <div class="contact-fab-anchor">
-        <div class="contact-fab-bubble" id="contactFabBubble" role="status" aria-live="polite" aria-hidden="true">
-            <button type="button" class="contact-fab-bubble-close" id="contactFabBubbleClose" aria-label="ปิดข้อความ">
-                <?= lucide_icon('x', ['size' => 14, 'stroke' => '2.5']) ?>
-            </button>
-            <p class="contact-fab-bubble-text"><strong>น้องหน่อไม้</strong>สวัสดีครับ มีอะไรให้ช่วยเหลือไหมครับ?</p>
-        </div>
-        <button
-            type="button"
-            class="contact-fab-hit"
-            id="contactFabTrigger"
-            aria-expanded="false"
-            aria-controls="contactFabPanel"
-            aria-label="ติดต่อเรา"
-        ></button>
-        <img
-            src="<?= e($contactFabMascotUrl) ?>"
-            class="contact-fab-mascot"
-            alt=""
-            width="128"
-            height="128"
-            loading="lazy"
-            decoding="async"
-            aria-hidden="true"
-        >
-    </div>
+    <button
+        type="button"
+        class="contact-fab-hit"
+        id="contactFabTrigger"
+        aria-expanded="false"
+        aria-controls="contactFabPanel"
+        aria-label="ติดต่อเรา"
+    >
+        <span class="contact-fab-hit-icon" aria-hidden="true">
+            <?= lucide_icon('message-circle', ['size' => 26, 'stroke' => '2']) ?>
+        </span>
+    </button>
 </div>

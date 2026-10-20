@@ -171,7 +171,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function visibleCount() {
-      return 1;
+      const w = window.innerWidth;
+      if (w <= 640) return 1;
+      if (w <= 960) return 2;
+      return 3;
     }
 
     function maxIndex() {
@@ -259,6 +262,120 @@ document.addEventListener('DOMContentLoaded', () => {
       if (autoplayTimer) window.clearInterval(autoplayTimer);
     });
     reviewsSlider.addEventListener('mouseleave', resetAutoplay);
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        renderDots();
+        update();
+      }, 150);
+    });
+
+    renderDots();
+    update();
+    resetAutoplay();
+  }
+
+  const coursesSlider = document.getElementById('coursesSlider');
+  if (coursesSlider) {
+    const track = coursesSlider.querySelector('.reviews-slider-track');
+    const cards = [...coursesSlider.querySelectorAll('.course-card')];
+    const prevBtn = coursesSlider.querySelector('.reviews-slider-prev');
+    const nextBtn = coursesSlider.querySelector('.reviews-slider-next');
+    const dotsWrap = coursesSlider.querySelector('.reviews-slider-dots');
+    let index = 0;
+    let autoplayTimer = null;
+
+    function visibleCount() {
+      const w = window.innerWidth;
+      if (w <= 520) return 1;
+      if (w <= 900) return 2;
+      if (w <= 1100) return 3;
+      return 4;
+    }
+
+    function maxIndex() {
+      return Math.max(0, cards.length - visibleCount());
+    }
+
+    function stepSize() {
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const cardWidth = cards[0]?.getBoundingClientRect().width ?? 0;
+      return cardWidth + gap;
+    }
+
+    function renderDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      const pages = maxIndex() + 1;
+      for (let i = 0; i < pages; i++) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'reviews-slider-dot' + (i === index ? ' is-active' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', `คอร์สชุดที่ ${i + 1}`);
+        dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        dot.addEventListener('click', () => {
+          index = i;
+          update();
+          resetAutoplay();
+        });
+        dotsWrap.appendChild(dot);
+      }
+      coursesSlider.classList.toggle('is-static', maxIndex() === 0);
+    }
+
+    function update() {
+      index = ((index % (maxIndex() + 1)) + (maxIndex() + 1)) % (maxIndex() + 1);
+      track.style.transform = `translate3d(-${index * stepSize()}px, 0, 0)`;
+      dotsWrap?.querySelectorAll('.reviews-slider-dot').forEach((dot, i) => {
+        const active = i === index;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+
+    function go(delta) {
+      if (maxIndex() === 0) return;
+      index += delta;
+      if (index > maxIndex()) index = 0;
+      if (index < 0) index = maxIndex();
+      update();
+    }
+
+    function resetAutoplay() {
+      if (autoplayTimer) window.clearInterval(autoplayTimer);
+      if (maxIndex() > 0) {
+        autoplayTimer = window.setInterval(() => go(1), 4200);
+      }
+    }
+
+    prevBtn?.addEventListener('click', () => {
+      go(-1);
+      resetAutoplay();
+    });
+    nextBtn?.addEventListener('click', () => {
+      go(1);
+      resetAutoplay();
+    });
+
+    let touchStartX = 0;
+    coursesSlider.querySelector('.reviews-slider-viewport')?.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0]?.screenX ?? 0;
+    }, { passive: true });
+    coursesSlider.querySelector('.reviews-slider-viewport')?.addEventListener('touchend', (e) => {
+      const diff = (e.changedTouches[0]?.screenX ?? 0) - touchStartX;
+      if (Math.abs(diff) > 50) {
+        go(diff < 0 ? 1 : -1);
+        resetAutoplay();
+      }
+    }, { passive: true });
+
+    coursesSlider.addEventListener('mouseenter', () => {
+      if (autoplayTimer) window.clearInterval(autoplayTimer);
+    });
+    coursesSlider.addEventListener('mouseleave', resetAutoplay);
 
     let resizeTimer;
     window.addEventListener('resize', () => {

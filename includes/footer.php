@@ -29,7 +29,7 @@ $footerYoutube = trim(getSetting('youtube_url', ''));
 
 $footerTiktok = trim(getSetting('tiktok_url', ''));
 
-$footerTagline = getSetting('site_tagline', 'สถาบันสอนภาษาจีนออนไลน์ คุณภาพ เรียนง่าย ได้ผลจริง');
+$footerTagline = getSetting('site_tagline', 'Learn Unlocked, Lead with Logic. เรียนเป็นระบบ ครบทุกวิชา สอบแข่งขันและสอบเข้า ม.1');
 
 require __DIR__ . '/views/contact_fab.php';
 
@@ -43,37 +43,38 @@ require __DIR__ . '/views/contact_fab.php';
 
         <div class="footer-brand">
             <a href="<?= APP_URL ?>/public/index.php" class="footer-brand-link">
-                <img src="<?= e(brandLogoAsset()) ?>" alt="Wenxin Chinese" class="footer-logo">
-                <span class="footer-brand-name">WENXIN CHINESE</span>
+                <img src="<?= e(brandLogoAsset()) ?>" alt="กวดวิชา Learning Studios" class="ls-footer-logo" width="360" height="139" loading="lazy">
             </a>
             <p class="footer-desc"><?= e($footerTagline) ?></p>
             <div class="footer-social">
                 <?php if ($footerFacebook !== ''): ?>
                 <a href="<?= e($footerFacebook) ?>" class="footer-social-link footer-social-fb" target="_blank" rel="noopener" aria-label="Facebook">
-                    <?= contactChannelIcon('facebook', 18) ?>
+                    <?= contactChannelIcon('facebook', 20, true) ?>
                 </a>
                 <?php endif; ?>
                 <?php if ($footerLineId !== ''): ?>
                 <a href="<?= e($footerLineUrl) ?>" class="footer-social-link footer-social-line" target="_blank" rel="noopener" aria-label="Line">
-                    <?= contactChannelIcon('line', 18) ?>
+                    <?= contactChannelIcon('line', 20, true) ?>
                 </a>
                 <?php endif; ?>
                 <?php if ($footerPhone !== ''): ?>
                 <a href="tel:<?= e(preg_replace('/\s+/', '', $footerPhone)) ?>" class="footer-social-link footer-social-phone" aria-label="โทรศัพท์">
-                    <?= contactChannelIcon('phone', 18) ?>
+                    <?= contactChannelIcon('phone', 20, true) ?>
                 </a>
                 <?php endif; ?>
                 <?php if ($footerEmail !== ''): ?>
                 <a href="mailto:<?= e($footerEmail) ?>" class="footer-social-link footer-social-email" aria-label="อีเมล">
-                    <?= contactChannelIcon('email', 18) ?>
+                    <?= contactChannelIcon('email', 20, true) ?>
                 </a>
                 <?php endif; ?>
-                <a href="<?= $footerTiktok !== '' ? e($footerTiktok) : '#' ?>" class="footer-social-link footer-social-tiktok"<?= $footerTiktok !== '' ? ' target="_blank" rel="noopener"' : '' ?> aria-label="TikTok">
-                    <?= contactChannelIcon('tiktok', 18) ?>
+                <?php if ($footerTiktok !== ''): ?>
+                <a href="<?= e($footerTiktok) ?>" class="footer-social-link footer-social-tiktok" target="_blank" rel="noopener" aria-label="TikTok">
+                    <?= contactChannelIcon('tiktok', 20, true) ?>
                 </a>
+                <?php endif; ?>
                 <?php if ($footerYoutube !== ''): ?>
                 <a href="<?= e($footerYoutube) ?>" class="footer-social-link footer-social-youtube" target="_blank" rel="noopener" aria-label="YouTube">
-                    <?= contactChannelIcon('youtube', 18) ?>
+                    <?= contactChannelIcon('youtube', 20, true) ?>
                 </a>
                 <?php endif; ?>
             </div>
@@ -148,7 +149,7 @@ require __DIR__ . '/views/contact_fab.php';
                 <li>
                     <a href="<?= e($footerLineUrl) ?>" class="footer-contact-chip footer-contact-chip--line" target="_blank" rel="noopener">
                         <span class="footer-contact-chip-icon" aria-hidden="true">
-                            <?= contactChannelIcon('line', 18) ?>
+                            <?= contactChannelIcon('line', 18, true) ?>
                         </span>
                         <span class="footer-contact-chip-text">
                             <small>LINE</small>
@@ -164,7 +165,7 @@ require __DIR__ . '/views/contact_fab.php';
                 <li>
                     <a href="tel:<?= e(preg_replace('/\s+/', '', $footerPhone)) ?>" class="footer-contact-chip footer-contact-chip--phone">
                         <span class="footer-contact-chip-icon" aria-hidden="true">
-                            <?= contactChannelIcon('phone', 18) ?>
+                            <?= contactChannelIcon('phone', 18, true) ?>
                         </span>
                         <span class="footer-contact-chip-text">
                             <small>โทร</small>
@@ -180,7 +181,7 @@ require __DIR__ . '/views/contact_fab.php';
                 <li>
                     <a href="mailto:<?= e($footerEmail) ?>" class="footer-contact-chip footer-contact-chip--email">
                         <span class="footer-contact-chip-icon" aria-hidden="true">
-                            <?= contactChannelIcon('email', 18) ?>
+                            <?= contactChannelIcon('email', 18, true) ?>
                         </span>
                         <span class="footer-contact-chip-text">
                             <small>อีเมล</small>
@@ -201,7 +202,7 @@ require __DIR__ . '/views/contact_fab.php';
 
         <div class="container footer-bottom-inner">
 
-            <p>&copy; <?= date('Y') ?> <?= e($footerContent['copyright'] ?? 'Wenxin Chinese. All Rights Reserved.') ?></p>
+            <p>&copy; <?= date('Y') ?> <?= e($footerContent['copyright'] ?? 'กวดวิชา Learning Studios. All Rights Reserved.') ?></p>
 
             <div class="footer-bottom-links">
 
@@ -245,7 +246,7 @@ if (!empty($toastMessage)):
 
 <?php endif; ?>
 
-<script src="<?= asset('js/main.js') ?>"></script>
+<script src="<?= asset('js/main.js') ?>?v=149"></script>
 
 </body>
 

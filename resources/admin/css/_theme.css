@@ -1,13 +1,13 @@
 @theme {
-  /* Wenxin brand (mapped to TailAdmin token scale) */
-  --color-brand-25: #fef2f2;
-  --color-brand-50: #fde8e9;
-  --color-brand-100: #fad1d3;
-  --color-brand-500: #c41e24;
-  --color-brand-600: #9a161b;
-  --color-brand-700: #7f1217;
-  --color-brand-soft: rgb(196 30 36 / 0.1);
-  --color-accent-gold: #d4a017;
+  /* THE LEONA TUTORS — green / gold */
+  --color-brand-25: #f4f8f7;
+  --color-brand-50: #e8f1ee;
+  --color-brand-100: #c5dbd4;
+  --color-brand-500: #33665f;
+  --color-brand-600: #29524c;
+  --color-brand-700: #1e3f3a;
+  --color-brand-soft: rgb(51 102 95 / 0.1);
+  --color-accent-gold: #c5a059;
 
   /* TailAdmin gray scale */
   --color-gray-50: #f9fafb;
@@ -54,7 +54,7 @@
   --shadow-xs: 0 1px 2px rgb(16 24 40 / 0.05);
   --shadow-sm: 0 1px 3px rgb(16 24 40 / 0.1), 0 1px 2px rgb(16 24 40 / 0.06);
   --shadow-md: 0 4px 8px -2px rgb(16 24 40 / 0.1), 0 2px 4px -2px rgb(16 24 40 / 0.06);
-  --shadow-focus: 0 0 0 4px rgb(196 30 36 / 0.12);
+  --shadow-focus: 0 0 0 4px rgb(0 64 55 / 0.12);
 
   /* Typography scale */
   --text-theme-xs: 0.75rem;

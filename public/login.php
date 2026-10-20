@@ -30,9 +30,8 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
 <section class="auth-page">
     <div class="auth-card">
-        <img src="<?= e(brandLogoAsset()) ?>" alt="Logo" class="auth-logo">
         <h1>เข้าสู่ระบบ</h1>
-        <p style="text-align:center;color:var(--gray-600);margin-bottom:1.5rem;font-size:.9rem">สำหรับนักเรียน Wenxin Chinese</p>
+        <p style="text-align:center;color:var(--gray-600);margin-bottom:1.5rem;font-size:.9rem">สำหรับนักเรียนกวดวิชา Learning Studios</p>
         <?php if ($error): ?>
             <div class="alert alert-error"><?= e($error) ?></div>
         <?php endif; ?>

@@ -1,6 +1,7 @@
 .env
 storage/logs/*.log
 storage/backups/*.sql
+storage/backup_*.sql
 uploads/payments/*
 !uploads/payments/.htaccess
 uploads/courses/*

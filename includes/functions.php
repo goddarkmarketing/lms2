@@ -178,7 +178,7 @@ function imageAsset(string $relativePath, string $fallbackPath = ''): string
 
 function brandLogoAsset(): string
 {
-    return imageAsset('images/logo.png', 'images/logo.svg');
+    return imageAsset('images/learning-studios/logo.png', 'images/logo.png');
 }
 
 function headingFontAsset(): string
@@ -207,6 +207,11 @@ function versionedCourseAsset(string $relativePath): string
     return $url;
 }
 
+function courseHasBookCover(array $course): bool
+{
+    return str_starts_with((string) ($course['image_url'] ?? ''), 'images/courses/ls/');
+}
+
 function courseCoverUrl(array $course): string
 {
     $slugCovers = [
@@ -218,6 +223,15 @@ function courseCoverUrl(array $course): string
         'exam-prep-hsk3' => 'images/courses/exam-hsk3.png',
         'exam-prep-hsk4' => 'images/courses/exam-hsk4.png',
         'exam-prep-hsk5' => 'images/courses/exam-hsk5.png',
+        'm1-intensive-live' => 'images/courses/leona-m1.jpg',
+        'm1-intensive-online' => 'images/courses/leona-m1.jpg',
+        'm4-intensive-live' => 'images/courses/leona-m4.jpg',
+        'm4-intensive-online' => 'images/courses/leona-m4.jpg',
+        'alevel-social-live' => 'images/courses/leona-alevel.jpg',
+        'alevel-social-online' => 'images/courses/leona-alevel.jpg',
+        'foundation-primary' => 'images/courses/leona-primary.jpg',
+        'foundation-lower-secondary' => 'images/courses/leona-lower-secondary.jpg',
+        'foundation-upper-secondary' => 'images/courses/leona-upper-secondary.jpg',
     ];
 
     $slug = $course['slug'] ?? '';
@@ -334,14 +348,14 @@ function courseAudienceBullets(array $course): array
 
     if ($category === 'foundation') {
         return [
-            'ผู้เริ่มเรียนภาษาจีน ไม่ต้องมีพื้นฐานมาก่อน',
-            'ผู้ที่ต้องการเรียนพินอินและเตรียมสอบ HSK 1',
-            'นักเรียน นักศึกษา หรือผู้ทำงานที่อยากเริ่มภาษาจีนอย่างถูกต้อง',
+            'นักเรียนประถมที่ต้องการปูพื้นฐานให้แน่นทุกวิชา',
+            'ผู้ที่ต้องการเตรียมความพร้อมก่อนติวสอบเข้า ม.1',
+            'นักเรียนที่อยากเรียนอย่างเป็นระบบ ทีละขั้นตอน',
         ];
     }
     if ($category === 'exam_prep') {
         return [
-            'ผู้ที่เรียนครบระดับแล้วและกำลังเตรียมสอบ HSK',
+            'ผู้ที่กำลังเตรียมสอบเข้า ม.1 GATE/GIFTED/EP/EPLUS และสอบแข่งขัน',
             'ผู้ที่ต้องการฝึกทำข้อสอบและทบทวนจุดอ่อนก่อนสอบจริง',
             'ผู้ที่ต้องการเทคนิคการทำข้อสอบและจัดการเวลาในห้องสอบ',
         ];
@@ -349,19 +363,19 @@ function courseAudienceBullets(array $course): array
 
     return match ($level) {
         'intermediate' => [
-            'ผู้ที่มีพื้นฐานภาษาจีนระดับต้นแล้ว',
-            'ผู้ที่ต้องการพัฒนาทักษะสื่อสารและอ่านเข้าใจระดับกลาง',
-            'ผู้ที่เตรียมสอบ HSK ระดับกลาง',
+            'ผู้ที่มีพื้นฐานแล้วและต้องการสรุปเนื้อหาให้ครบในเวลาสั้น',
+            'ผู้ที่ต้องการทบทวนเนื้อหาก่อนสอบแข่งขันและสอบเข้า ม.1',
+            'ผู้ที่ต้องการเนื้อหาเข้มข้นเกินหลักสูตร',
         ],
         'advanced' => [
-            'ผู้ที่มีพื้นฐานภาษาจีนระดับกลางขึ้นไป',
-            'ผู้ที่ต้องการพัฒนาทักษะระดับสูงเพื่อการเรียน การทำงาน หรือสอบ HSK',
-            'ผู้ที่ต้องการอ่านและเขียนภาษาจีนในบริบทที่ซับซ้อนขึ้น',
+            'ผู้ที่มีพื้นฐานระดับกลางขึ้นไป',
+            'ผู้ที่ต้องการติวเข้มเพื่อสอบแข่งขันและสอบเข้า ม.1 โรงเรียนชั้นนำ',
+            'ผู้ที่ต้องการวิเคราะห์โจทย์และตัดตัวเลือกได้แม่นขึ้น',
         ],
         default => [
-            'ผู้ที่เรียนภาษาจีนมาบ้างแล้วและต้องการต่อยอด',
-            'ผู้ที่ต้องการเสริมคำศัพท์ ไวยากรณ์ และทักษะสื่อสาร',
-            'ผู้ที่เตรียมสอบ HSK ในระดับถัดไป',
+            'ผู้ที่ต้องการสรุปเนื้อหาเข้มข้น GATE/GIFTED/EP/EPLUS',
+            'ผู้ที่ต้องการเสริมเนื้อหาและเทคนิคทำข้อสอบ',
+            'ผู้ที่เตรียมสอบเข้า ม.1 โรงเรียนชั้นนำ',
         ],
     };
 }
@@ -458,15 +472,15 @@ function getSettings(): array
         return $settings;
     } catch (Throwable) {
         return [
-            'site_title' => 'Wenxin Chinese',
-            'site_tagline' => 'เหวินซิน ปั้นภาษาจีนให้เป็นเรื่องง่าย',
-            'bank_account_name' => 'นางสาว พวงพกา แสนคำแพ',
-            'bank_name' => 'กสิกร',
-            'bank_account_number' => '0691172899',
+            'site_title' => 'กวดวิชา Learning Studios',
+            'site_tagline' => 'Learn Unlocked, Lead with Logic. เรียนเป็นระบบ ครบทุกวิชา สอบแข่งขันและสอบเข้า ม.1',
+            'bank_account_name' => 'นางสาวสินีนาฎ สุริยวาลย์',
+            'bank_name' => 'กรุงไทย',
+            'bank_account_number' => '',
             'payment_note' => 'กรุณาแจ้งหลักฐานการโอน เพื่อความรวดเร็วในการดำเนินการ ขอบคุณค่ะ',
-            'facebook_url' => 'https://www.facebook.com/profile.php?id=61567439751026',
-            'line_id' => '@janeyangpeiling',
-            'phone' => '0895567438',
+            'facebook_url' => '',
+            'line_id' => '@learn.studios',
+            'phone' => '065-614-4988',
         ];
     }
 }
@@ -587,7 +601,7 @@ function categoryLabel(string $category): string
 {
     return match ($category) {
         'foundation' => 'พื้นฐาน',
-        'hsk' => 'HSK',
+        'hsk' => 'สรุปเนื้อหา',
         'exam_prep' => 'ติวสอบ',
         default => 'ทั่วไป',
     };

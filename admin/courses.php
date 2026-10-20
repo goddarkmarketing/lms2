@@ -117,7 +117,7 @@ $courses = getCourses(null, false);
                     <label>หมวด</label>
                     <select name="category" class="form-control">
                         <option value="foundation" <?= ($editCourse['category'] ?? '') === 'foundation' ? 'selected' : '' ?>>พื้นฐาน</option>
-                        <option value="hsk" <?= ($editCourse['category'] ?? 'hsk') === 'hsk' ? 'selected' : '' ?>>HSK</option>
+                        <option value="hsk" <?= ($editCourse['category'] ?? 'hsk') === 'hsk' ? 'selected' : '' ?>>สรุปเนื้อหา</option>
                         <option value="exam_prep" <?= ($editCourse['category'] ?? '') === 'exam_prep' ? 'selected' : '' ?>>ติวสอบ</option>
                     </select>
                 </div>
@@ -152,7 +152,7 @@ $courses = getCourses(null, false);
                 <label>รูปปกคอร์ส</label>
                 <input type="file" name="cover_image" class="form-control" accept="image/jpeg,image/png,image/webp,image/gif">
                 <input type="text" name="image_url" class="form-control form-control-follow" value="<?= e($editCourse['image_url'] ?? '') ?>" placeholder="หรือใส่ URL / path เช่น images/courses/photo.jpg">
-                <small>อัปโหลดไฟล์ (สูงสุด 3MB) หรือใส่ลิงก์รูป</small>
+                <small>เปลี่ยนรูปปกได้เองจากหน้านี้ ไม่ต้องแจ้งผู้พัฒนา — อัปโหลด JPG, PNG, WEBP หรือ GIF (สูงสุด 3MB) หรือใส่ลิงก์รูป</small>
                 <?php if (!empty($editCourse)): ?>
                     <img src="<?= e(courseCoverUrl($editCourse)) ?>" alt="" class="form-preview-img">
                 <?php endif; ?>
@@ -171,8 +171,9 @@ $courses = getCourses(null, false);
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>ลิงก์ Zoom คอร์ส (ใช้ร่วมทุกรอบถ้าไม่กำหนดแยก)</label>
-                    <input type="url" name="zoom_url" class="form-control" value="<?= e($editCourse['zoom_url'] ?? '') ?>" placeholder="https://zoom.us/j/...">
+                    <label>ลิงก์เรียนสด (Google Meet หรือ Zoom)</label>
+                    <input type="url" name="zoom_url" class="form-control" value="<?= e($editCourse['zoom_url'] ?? '') ?>" placeholder="https://meet.google.com/xxx-xxxx-xxx">
+                    <small>วางลิงก์ Google Meet ของรอบสอน หรือลิงก์ Zoom ก็ได้ ถ้าว่างไว้ในแต่ละรอบ ระบบจะใช้ลิงก์นี้ร่วมกัน</small>
                 </div>
             </div>
             <div class="form-group">

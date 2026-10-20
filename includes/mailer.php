@@ -55,7 +55,7 @@ function sendMail(string $to, string $subject, string $htmlBody): bool
     }
 
     $from = getSetting('email_from', 'noreply@wenxin.local');
-    $fromName = getSetting('email_from_name', 'Wenxin Chinese');
+    $fromName = getSetting('email_from_name', 'กวดวิชา Learning Studios');
 
     if (emailTransport() === 'smtp') {
         $host = getSetting('smtp_host', '');
@@ -90,7 +90,7 @@ function sendMail(string $to, string $subject, string $htmlBody): bool
 
 function mailTemplate(string $title, string $body): string
 {
-    $site = e(getSetting('site_title', 'Wenxin Chinese'));
+    $site = e(getSetting('site_title', 'กวดวิชา Learning Studios'));
     return '<!DOCTYPE html><html lang="th"><body style="font-family:sans-serif;line-height:1.6;color:#333;max-width:560px;margin:0 auto;padding:24px">'
         . '<h2 style="color:#c41e24">' . e($title) . '</h2>'
         . $body
@@ -153,7 +153,10 @@ function notifyBookingConfirmedEmail(string $studentEmail, string $studentName, 
         . '<li><strong>คอร์ส:</strong> ' . e($courseTitle) . '</li>'
         . '<li><strong>วันเวลา:</strong> ' . e($sessionWhen) . '</li>';
     if ($zoomUrl) {
-        $body .= '<li><strong>Zoom:</strong> <a href="' . e($zoomUrl) . '">' . e($zoomUrl) . '</a></li>';
+        if (!function_exists('liveMeetingLinkLabel')) {
+            require_once __DIR__ . '/booking.php';
+        }
+        $body .= '<li><strong>' . e(liveMeetingLinkLabel($zoomUrl)) . ':</strong> <a href="' . e($zoomUrl) . '">' . e($zoomUrl) . '</a></li>';
     }
     $body .= '</ul>'
         . '<p><a href="' . e(siteBaseUrl() . '/public/profile.php?tab=bookings') . '" style="display:inline-block;background:#c41e24;color:#fff;padding:10px 20px;text-decoration:none;border-radius:6px">ดูการจองของฉัน</a></p>';
@@ -164,7 +167,7 @@ function notifyBookingConfirmedEmail(string $studentEmail, string $studentName, 
 function sendPasswordResetEmail(string $email, string $studentName, string $resetUrl): bool
 {
     $body = '<p>สวัสดีคุณ ' . e($studentName) . '</p>'
-        . '<p>เราได้รับคำขอรีเซ็ตรหัสผ่านสำหรับบัญชี Wenxin Chinese ของคุณ</p>'
+        . '<p>เราได้รับคำขอรีเซ็ตรหัสผ่านสำหรับบัญชีกวดวิชา Learning Studios ของคุณ</p>'
         . '<p><a href="' . e($resetUrl) . '" style="display:inline-block;background:#c41e24;color:#fff;padding:10px 20px;text-decoration:none;border-radius:6px">ตั้งรหัสผ่านใหม่</a></p>'
         . '<p>ลิงก์นี้ใช้ได้ 1 ชั่วโมง หากคุณไม่ได้ขอรีเซ็ตรหัสผ่าน สามารถละเว้นอีเมลนี้ได้</p>'
         . '<p style="font-size:12px;color:#888">หรือคัดลอกลิงก์: ' . e($resetUrl) . '</p>';

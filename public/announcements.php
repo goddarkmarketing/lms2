@@ -27,7 +27,7 @@ $categories = [
             <span>บอร์ดประชาสัมพันธ์</span>
         </nav>
         <h1>บอร์ดประชาสัมพันธ์</h1>
-        <p>ข่าวสาร โปรโมชัน และประกาศจาก Wenxin Chinese</p>
+        <p>ข่าวสาร โปรโมชัน และประกาศจากกวดวิชา Learning Studios</p>
     </div>
 </header>
 

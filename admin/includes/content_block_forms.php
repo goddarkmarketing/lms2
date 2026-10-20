@@ -80,7 +80,7 @@ elseif ($tab === 'home' && $block === 'trust'):
 elseif ($tab === 'home' && $block === 'why'):
     $formOpen('home', 'why');
     ?>
-    <h3>ทำไมต้องเรียนกับ Wenxin</h3>
+    <h3>ทำไมต้องเรียนกับ Learning Studios</h3>
     <div class="form-row">
         <div class="form-group"><label>ป้ายบน</label><input type="text" name="why_eyebrow" class="form-control" value="<?= e($home['why']['eyebrow'] ?? '') ?>"></div>
         <div class="form-group"><label>หัวข้อ</label><input type="text" name="why_title" class="form-control" value="<?= e($home['why']['title'] ?? '') ?>"></div>

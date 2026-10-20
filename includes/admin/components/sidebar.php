@@ -9,9 +9,9 @@ $navGroups = require __DIR__ . '/../nav_config.php';
 ?>
 <aside class="admin-sidebar" id="adminSidebar">
     <a href="<?= APP_URL ?>/admin/dashboard.php" class="admin-brand">
-        <img src="<?= e(brandLogoAsset()) ?>" alt="Logo">
+        <img class="admin-brand-logo" src="<?= e(asset('images/learning-studios/icon-192.png')) ?>" alt="" width="40" height="40" decoding="async">
         <span class="admin-brand-text">
-            <strong>Wenxin</strong>
+            <strong>Learning Studios</strong>
             <small>Admin Panel</small>
         </span>
     </a>

@@ -49,7 +49,7 @@ $functionSlides = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title><?= e($pageTitle) ?> | Wenxin Chinese</title>
+    <title><?= e($pageTitle) ?> | กวดวิชา Learning Studios</title>
     <meta name="description" content="สรุปฟังก์ชั่นระบบ LMS: ขายคอร์ส ชำระเงิน เรียนวิดีโอ คลาส Live และหลังบ้านผู้ดูแล">
     <?php require dirname(__DIR__) . '/includes/views/fonts_head.php'; ?>
     <link rel="stylesheet" href="<?= e(asset('css/lms-overview.css')) ?>?v=<?= e((string) (@filemtime(BASE_PATH . '/assets/css/lms-overview.css') ?: 1)) ?>">
@@ -208,7 +208,7 @@ $functionSlides = [
                             </li>
                             <li>
                                 <span class="lo-li-icon" aria-hidden="true"><?= lucide_icon('calendar', ['size' => 18, 'stroke' => '1.75']) ?></span>
-                                <span>จองรอบคลาส Live + เข้า Zoom</span>
+                                <span>จองรอบคลาส Live + เข้า Google Meet</span>
                             </li>
                             <li>
                                 <span class="lo-li-icon" aria-hidden="true"><?= lucide_icon('clipboard-check', ['size' => 18, 'stroke' => '1.75']) ?></span>
@@ -303,7 +303,7 @@ $functionSlides = [
                     </div>
                     <div class="lo-item">
                         <h3>Live</h3>
-                        <p>จองรอบเรียน จำกัดจำนวนที่นั่ง และเข้าเรียนผ่านลิงก์ Zoom เมื่อยืนยันแล้ว</p>
+                        <p>จองรอบเรียน จำกัดจำนวนที่นั่ง และเข้าเรียนผ่านลิงก์ Google Meet เมื่อยืนยันแล้ว</p>
                     </div>
                     <div class="lo-item">
                         <h3>Hybrid</h3>
@@ -339,7 +339,7 @@ $functionSlides = [
                         </li>
                         <li>
                             <span class="lo-li-icon" aria-hidden="true"><?= lucide_icon('video', ['size' => 18, 'stroke' => '1.75']) ?></span>
-                            <span>ลิงก์ Zoom ในรอบคลาส Live</span>
+                            <span>ลิงก์ Google Meet ในรอบคลาส Live</span>
                         </li>
                         <li>
                             <span class="lo-li-icon" aria-hidden="true"><?= lucide_icon('ticket', ['size' => 18, 'stroke' => '1.75']) ?></span>

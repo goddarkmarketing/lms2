@@ -7,7 +7,7 @@ $pageTitle = 'ข้อกำหนดการใช้งาน';
 require_once dirname(__DIR__) . '/includes/header.php';
 
 $custom = trim(getSetting('terms_html', ''));
-$siteTitle = getSetting('site_title', 'Wenxin Chinese');
+$siteTitle = getSetting('site_title', 'กวดวิชา Learning Studios');
 $phone = getSetting('phone', '');
 $lineId = getSetting('line_id', '');
 

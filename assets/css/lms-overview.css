@@ -4,8 +4,8 @@
   --lo-ink: #1a1a1a;
   --lo-muted: #5c5c5c;
   --lo-line: #e8e8e8;
-  --lo-red: #c41e24;
-  --lo-red-dark: #8b1218;
+  --lo-red: #0b4fd1;
+  --lo-red-dark: #083fa8;
   --lo-bg: #ffffff;
   --lo-font: 'BetterTogether', 'Segoe UI', sans-serif;
 }
@@ -444,7 +444,7 @@ p {
   top: 0;
   bottom: 0;
   width: 5px;
-  background: linear-gradient(180deg, var(--lo-red) 0%, #e85a5f 100%);
+  background: linear-gradient(180deg, var(--lo-red) 0%, #2a7a6a 100%);
 }
 
 .lo-price-badge {

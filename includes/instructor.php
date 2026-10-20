@@ -7,10 +7,10 @@ require_once __DIR__ . '/homepage.php';
 function instructorDefaultCredentials(): array
 {
     return [
-        'ปริญญาโท การสอนภาษาจีน มหาวิทยาลัยปักกิ่ง',
-        'ประสบการณ์สอนภาษาจีนมากกว่า 8 ปี',
-        'สอนผู้เรียนออนไลน์มากกว่า 5,000+ คน',
-        'เชี่ยวชาญการเตรียมสอบ HSK ตั้งแต่ระดับ 1–5',
+        'ผู้สอนหลัก สังคมศึกษาและประวัติศาสตร์',
+        'ประสบการณ์ติวสอบเข้า ม.1 ม.4 และ A-Level',
+        'สอนผู้เรียนออนไลน์และในห้องเรียน',
+        'เชี่ยวชาญเทคนิคทำข้อสอบสังคมศึกษา',
     ];
 }
 
@@ -20,7 +20,7 @@ function instructorDefaultHighlights(): array
         'สอนเข้าใจง่าย เน้นใช้งานจริงในชีวิตประจำวัน',
         'เนื้อหาเป็นระบบ เรียนซ้ำได้ไม่จำกัดเวลา',
         'แบบฝึกหัดและแบบทดสอบครบทุกคอร์ส',
-        'เน้นเทคนิคเตรียมสอบ HSK ที่ใช้ได้จริง',
+        'เน้นเทคนิคเตรียมสอบเข้าและ A-Level ที่ใช้ได้จริง',
     ];
 }
 
@@ -48,11 +48,11 @@ function getInstructorProfile(?array $homeStats = null): array
     }
 
     return [
-        'name' => getSetting('instructor_name', 'อาจารย์เหวินซิน (Wenxin)'),
-        'role' => getSetting('instructor_role', 'ผู้สอนหลัก · Wenxin Chinese'),
-        'tagline' => getSetting('instructor_tagline', 'ครูภาษาจีนออนไลน์ · ผู้เชี่ยวชาญเตรียมสอบ HSK ทุกระดับ'),
-        'bio' => getSetting('instructor_bio', 'อาจารย์เหวินซินเป็นครูภาษาจีนออนไลน์ที่มุ่งเน้นให้ผู้เรียนเข้าใจภาษาจีนอย่างเป็นระบบ ไม่ท่องจำแบบสอนตะกวด ด้วยประสบการณ์สอนทั้งในไทยและต่างประเทศ อาจารย์ออกแบบคอร์สให้เหมาะกับผู้เริ่มต้นจนถึงผู้เตรียมสอบ HSK ระดับสูง เน้นให้ผู้เรียนนำไปใช้ได้จริงทั้งการสื่อสาร การอ่าน และการเตรียมสอบ'),
-        'quote' => getSetting('instructor_quote', 'เหวินซิน ปั้นภาษาจีนให้เป็นเรื่องง่าย — สอนด้วยหลักการที่เข้าใจง่ายและนำไปใช้ได้จริง'),
+        'name' => getSetting('instructor_name', 'ครูแพรว'),
+        'role' => getSetting('instructor_role', 'ผู้สอนหลัก · กวดวิชา Learning Studios'),
+        'tagline' => getSetting('instructor_tagline', 'ติวสังคมศึกษาและประวัติศาสตร์ · เตรียมสอบเข้า ม.1 ม.4 และ A-Level'),
+        'bio' => getSetting('instructor_bio', 'ครูแพรว Co-founder กวดวิชา Learning Studios ครูผู้สอนวิชาคณิตศาสตร์ สำหรับเตรียมสอบเข้า ม.1 โรงเรียนชั้นนำ และสอบแข่งขัน'),
+        'quote' => getSetting('instructor_quote', 'ติวให้เข้าใจจริง ทำข้อสอบได้ มั่นใจก่อนวันสอบ'),
         'photo_path' => trim(getSetting('instructor_photo', '')),
         'credentials' => $credentials,
         'highlights' => $highlights,

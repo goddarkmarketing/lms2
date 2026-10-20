@@ -13,7 +13,7 @@ $isLive = isLiveCourse($course);
 ?>
 <article class="course-card" data-category="<?= e($course['category']) ?>" data-type="<?= e($course['course_type'] ?? 'recorded') ?>">
     <a href="<?= e($detailUrl) ?>" class="course-card-image-link">
-        <div class="course-card-image">
+        <div class="course-card-image<?= courseHasBookCover($course) ? ' course-card-image--book' : '' ?>">
             <img src="<?= e($coverUrl) ?>" alt="<?= e($course['title']) ?>" loading="lazy">
             <div class="course-card-image-overlay">
                 <span class="badge badge-red"><?= e(categoryLabel($course['category'])) ?></span>
@@ -28,10 +28,6 @@ $isLive = isLiveCourse($course);
         <h3 class="course-card-title">
             <a href="<?= e($detailUrl) ?>"><?= e($course['title']) ?></a>
         </h3>
-        <?php if (!empty($course['subtitle'])): ?>
-            <p class="course-card-sub"><?= e($course['subtitle']) ?></p>
-        <?php endif; ?>
-        <p class="course-card-desc"><?= e(mb_strimwidth(strip_tags($course['description'] ?? ''), 0, 100, '...')) ?></p>
         <?php if ($highlights): ?>
             <ul class="course-tags">
                 <?php foreach (array_slice($highlights, 0, 3) as $tag): ?>

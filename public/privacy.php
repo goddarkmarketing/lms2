@@ -7,7 +7,7 @@ $pageTitle = 'นโยบายความเป็นส่วนตัว';
 require_once dirname(__DIR__) . '/includes/header.php';
 
 $custom = trim(getSetting('privacy_policy_html', ''));
-$siteTitle = getSetting('site_title', 'Wenxin Chinese');
+$siteTitle = getSetting('site_title', 'กวดวิชา Learning Studios');
 $phone = getSetting('phone', '');
 $lineId = getSetting('line_id', '');
 

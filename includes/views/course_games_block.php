@@ -17,7 +17,7 @@ $variant = $variant ?? 'sidebar';
                 <?php if (!empty($game['description']) && $variant === 'course'): ?>
                 <span class="course-games-link-desc"><?= e(mb_strimwidth($game['description'], 0, 80, '...')) ?></span>
                 <?php endif; ?>
-                <span class="course-games-link-cta"><?= $variant === 'sidebar' ? 'เล่นเกม' : 'เล่น →' ?></span>
+                <span class="course-games-link-cta"><?= $variant === 'sidebar' ? 'เล่นเกม' : ('เล่น' . lucide_text_link_suffix(14)) ?></span>
             </a>
         </li>
         <?php endforeach; ?>
